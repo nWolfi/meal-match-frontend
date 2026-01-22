@@ -1,11 +1,62 @@
 <label for="meal-name">Meal Name:</label>
 <input
   [(ngModel)]="mealNameText"
-  (ngModelChange)="log()"
   type="text"
   id="meal-name"
   name="meal-name"
   placeholder="Enter meal"
 />
+
+<label for="meal-image">Meal Image:</label>
+<input
+  type="file"
+  id="meal-image"
+  name="meal-image"
+  accept="image/*"
+  (change)="onImageSelected($event)"
+/>
+
+@for(item of Ingredients; track $index; let i = $index) {
+  <div>
+    <label for="ingredient-name-{{ i }}">Ingredient Name:</label>
+    <input
+      [(ngModel)]="item.name"
+      type="text"
+      id="ingredient-name-{{ i }}"
+      name="ingredient-name-{{ i }}"
+      placeholder="Enter ingredient name"
+    />
+
+    <label for="ingredient-gram-{{ i }}">Grams:</label>
+    <input
+      [(ngModel)]="item.gram"
+      type="number"
+      id="ingredient-gram-{{ i }}"
+      name="ingredient-gram-{{ i }}"
+      placeholder="Enter grams"
+    />
+
+    <label for="ingredient-calories-{{ i }}">Calories per Gram:</label>
+    <input
+      [(ngModel)]="item.caloriesPerGram"
+      type="number"
+      id="ingredient-calories-{{ i }}"
+      name="ingredient-calories-{{ i }}"
+      placeholder="Enter calories per gram"
+    />
+
+    <button
+      type="button"
+      (click)="removeIngredient(i)"
+      [disabled]="Ingredients.length <= 1"
+      aria-label="Remove ingredient"
+    >
+      -
+    </button>
+  </div>
+
+}
+<label for="button">Add ingredient</label>
+<button type="button" (click)="addIngredient()" aria-label="Add ingredient">+</button>
 
 <button (click)="createMeal()">Create Meal</button>
