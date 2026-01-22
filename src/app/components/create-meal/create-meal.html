@@ -1,0 +1,11 @@
+<label for="meal-name">Meal Name:</label>
+<input
+  [(ngModel)]="mealNameText"
+  (ngModelChange)="log()"
+  type="text"
+  id="meal-name"
+  name="meal-name"
+  placeholder="Enter meal"
+/>
+
+<button (click)="createMeal()">Create Meal</button>
