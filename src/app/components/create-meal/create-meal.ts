@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Meal } from '../../model/meal.model';
+import { MealService } from '../../services/meal.service';
 
 @Component({
   selector: 'app-create-meal',
@@ -8,14 +10,18 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './create-meal.scss',
 })
 export class CreateMeal {
-  mealNameText: string = 'gfngf';
+  mealService = inject(MealService);
+
+  meal: Meal = { name: '' };
 
   createMeal() {
-    console.log('Creating meal:', this.mealNameText);
-    this.mealNameText = 'text wurde geändert';
-  }
-
-  log() {
-    console.log(this.mealNameText);
+    this.mealService.createMeal(this.meal).subscribe({
+      next: (response) => {
+        console.log('Meal created successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error creating meal:', error);
+      },
+    });
   }
 }
