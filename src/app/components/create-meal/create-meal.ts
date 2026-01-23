@@ -40,6 +40,8 @@ export class CreateMeal {
   }
 
   createMeal() {
+
+    console.log('Meal created successfully:', this.meal);
     this.mealService.createMeal(this.meal, this.selectedFile!).subscribe({
       next: (response) => {
         console.log('Meal created successfully:', response);

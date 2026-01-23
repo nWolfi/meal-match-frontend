@@ -1,33 +1,111 @@
-<label for="meal-name">Meal Name:</label>
-<input
-  [(ngModel)]="meal.name"
-  type="text"
-  id="meal-name"
-  name="meal-name"
-  placeholder="Enter meal name"
-/>
+<section class="create-meal">
+  <header class="create-meal__header">
+    <p class="create-meal__eyebrow">Create Meal</p>
+    <h1 class="create-meal__title">Dein neues Gericht</h1>
+    <p class="create-meal__subtitle">
+      Stelle Zutaten zusammen, lade ein Foto hoch und speichere dein Meal.
+    </p>
+  </header>
 
-<label for="meal-image">Meal Image:</label>
-<input
-  type="file"
-  id="meal-image"
-  name="meal-image"
-  (change)="onFileSelected($event)"
-  accept="image/*"
-/>
+  <div class="create-meal__grid">
+    <div class="panel">
+      <div class="panel__header">
+        <h2 class="panel__title">Gericht Basics</h2>
+        <p class="panel__hint">Name und Foto fuer die Uebersicht.</p>
+      </div>
 
-<label for="ingredient-name">Ingredient Name:</label>
-<input type="text" [(ngModel)]="ingredient.name" />
-<label for="ingredient-gram">Ingredient Gram:</label>
-<input type="number" [(ngModel)]="ingredient.gram" />
-<label for="ingredient-calories">Calories Per Gram:</label>
-<input type="number" [(ngModel)]="ingredient.caloriesPerGram" />
-<button (click)="addIngredient()">add Ingredient</button>
+      <div class="field">
+        <label class="field__label" for="meal-name">Gerichtname</label>
+        <input
+          class="field__input"
+          [(ngModel)]="meal.name"
+          type="text"
+          id="meal-name"
+          name="meal-name"
+          placeholder="z.B. Gruenes Thai Curry"
+        />
+      </div>
 
-@for (item of meal.Ingredients; track $index) {
-  <p>{{ item.name }}</p>
-  <p>{{ item.gram }}</p>
-  <p>{{ item.caloriesPerGram }}</p>
-}
+      <div class="field">
+        <label class="field__label" for="meal-image">Gerichtfoto</label>
+        <input
+          class="field__input file-input"
+          type="file"
+          id="meal-image"
+          name="meal-image"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+        />
+        <span class="field__hint">JPG oder PNG, max. 5 MB.</span>
+      </div>
+    </div>
 
-<button (click)="createMeal()">Create Meal</button>
+    <div class="panel panel--accent">
+      <div class="panel__header">
+        <h2 class="panel__title">Zutaten</h2>
+        <p class="panel__hint">Mengen und Kalorien pro Gramm.</p>
+      </div>
+
+      <div class="ingredient-grid">
+        <div class="field">
+          <label class="field__label" for="ingredient-name">Zutat</label>
+          <input
+            class="field__input"
+            type="text"
+            id="ingredient-name"
+            [(ngModel)]="ingredient.name"
+            placeholder="z.B. Avocado"
+          />
+        </div>
+        <div class="field">
+          <label class="field__label" for="ingredient-gram">Menge (g)</label>
+          <input
+            class="field__input"
+            type="number"
+            id="ingredient-gram"
+            [(ngModel)]="ingredient.gram"
+            placeholder="100"
+          />
+        </div>
+        <div class="field">
+          <label class="field__label" for="ingredient-calories">
+            Kalorien pro g
+          </label>
+          <input
+            class="field__input"
+            type="number"
+            id="ingredient-calories"
+            [(ngModel)]="ingredient.caloriesPerGram"
+            placeholder="0.9"
+          />
+        </div>
+      </div>
+
+      <button class="btn btn--ghost" type="button" (click)="addIngredient()">
+        Zutat hinzufuegen
+      </button>
+
+      <div class="ingredients-list">
+        <p class="ingredients-list__title">Aktuelle Zutaten</p>
+        @for (item of meal.Ingredients; track $index) {
+          <div class="ingredient-chip">
+            <span class="ingredient-chip__name">{{ item.name }}</span>
+            <span class="ingredient-chip__meta">{{ item.gram }} g</span>
+            <span class="ingredient-chip__meta">
+              {{ item.caloriesPerGram }} kcal/g
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="create-meal__actions">
+    <button class="btn btn--primary" type="button" (click)="createMeal()">
+      Meal erstellen
+    </button>
+    <p class="create-meal__note">
+      Rezept spaeter anpassen, Zutaten jederzeit ergaenzen.
+    </p>
+  </div>
+</section>
