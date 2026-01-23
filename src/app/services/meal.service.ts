@@ -12,6 +12,8 @@ export class MealService {
     const formData = new FormData();
     formData.append('meal', new Blob([JSON.stringify(meal)], { type: 'application/json' }));
     formData.append('image', image);
-    return this.ApiAdapterService.postFormData<Meal>('meals', formData);
+
+    console.log(image);
+    return this.ApiAdapterService.postFormData<Meal>('meal', formData);
   }
 }
