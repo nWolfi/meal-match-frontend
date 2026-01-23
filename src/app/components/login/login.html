@@ -13,11 +13,13 @@
       <h2>Login</h2>
       <div class="input-group">
         <label for="username">Benutzername</label>
-        <input type="text" id="username" name="username" placeholder="Benutzername">
+        <input type="text" id="username" name="username" placeholder="Benutzername"
+        [(ngModel)]="login.username">
       </div>
       <div class="input-group">
         <label for="password">Passwort</label>
-        <input type="password" id="password" name="password" placeholder="Passwort">
+        <input type="password" id="password" name="password" placeholder="Passwort"
+        [(ngModel)]="login.password">
       </div>
       <button type="submit">Anmelden</button>
       <p class="forgot"><a href="#">Passwort vergessen?</a></p>
