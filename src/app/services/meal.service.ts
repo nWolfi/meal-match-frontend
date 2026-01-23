@@ -8,7 +8,10 @@ import { Meal } from '../model/meal.model';
 export class MealService {
   ApiAdapterService = inject(ApiAdapterService);
 
-  createMeal(meal: Meal) {
-    return this.ApiAdapterService.post<Meal>('meal/test', meal);
+  createMeal(meal: Meal, image: File) {
+    const formData = new FormData();
+    formData.append('meal', new Blob([JSON.stringify(meal)], { type: 'application/json' }));
+    formData.append('image', image);
+    return this.ApiAdapterService.postFormData<Meal>('meals', formData);
   }
 }

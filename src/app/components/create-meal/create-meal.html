@@ -7,4 +7,27 @@
   placeholder="Enter meal name"
 />
 
+<label for="meal-image">Meal Image:</label>
+<input
+  type="file"
+  id="meal-image"
+  name="meal-image"
+  (change)="onFileSelected($event)"
+  accept="image/*"
+/>
+
+<label for="ingredient-name">Ingredient Name:</label>
+<input type="text" [(ngModel)]="ingredient.name" />
+<label for="ingredient-gram">Ingredient Gram:</label>
+<input type="number" [(ngModel)]="ingredient.gram" />
+<label for="ingredient-calories">Calories Per Gram:</label>
+<input type="number" [(ngModel)]="ingredient.caloriesPerGram" />
+<button (click)="addIngredient()">add Ingredient</button>
+
+@for (item of meal.Ingredients; track $index) {
+  <p>{{ item.name }}</p>
+  <p>{{ item.gram }}</p>
+  <p>{{ item.caloriesPerGram }}</p>
+}
+
 <button (click)="createMeal()">Create Meal</button>
