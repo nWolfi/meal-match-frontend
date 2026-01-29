@@ -1,1 +1,43 @@
-<p>swipe-page works!</p>
+<section class="swipe">
+  <header class="swipe__header">
+    <p class="swipe__eyebrow">Meal Match</p>
+    <h1 class="swipe__title">Swipe deine Meals</h1>
+    <p class="swipe__subtitle">
+      Bewerte jedes Gericht mit einem schnellen Klick.
+    </p>
+  </header>
+
+  <div class="swipe__card">
+    @if (isLoading) {
+      <p class="swipe__status">Meals werden geladen...</p>
+    } @else if (currentMeal) {
+      <div class="swipe__media">
+        @if (getMealImage(currentMeal)) {
+          <img
+            class="swipe__image"
+            [src]="getMealImage(currentMeal)"
+            [alt]="currentMeal.name"
+          />
+        } @else {
+          <div class="swipe__placeholder">
+            <span>Kein Bild vorhanden</span>
+          </div>
+        }
+      </div>
+      <div class="swipe__info">
+        <h2 class="swipe__name">{{ currentMeal.name }}</h2>
+        <p class="swipe__hint">Wie gefällt dir das Meal?</p>
+        <div class="swipe__actions">
+          <button class="btn btn--ghost" type="button" (click)="rateMeal(false)">
+            Gefaellt mir nicht
+          </button>
+          <button class="btn btn--primary" type="button" (click)="rateMeal(true)">
+            Gefaellt mir
+          </button>
+        </div>
+      </div>
+    } @else {
+      <p class="swipe__status">Keine weiteren Meals vorhanden.</p>
+    }
+  </div>
+</section>
