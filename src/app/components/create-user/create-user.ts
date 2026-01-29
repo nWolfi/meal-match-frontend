@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -10,6 +11,7 @@ import { UserService } from '../services/user.service';
 })
 export class CreateUser {
   userService = inject(UserService);
+  router = inject(Router);
 
   userNameText: string = '';
   passwordText: string = '';
@@ -28,5 +30,9 @@ export class CreateUser {
           console.error('Error creating user:', error);
         },
       });
+  }
+
+  move(){
+    this.router.navigate(['/login']);
   }
 }

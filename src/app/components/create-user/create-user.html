@@ -29,7 +29,7 @@
       <input
         class="field__input"
         [(ngModel)]="passwordText"
-        type="text"
+        type="password"
         id="password"
         name="password"
         placeholder="Mindestens 8 Zeichen"
@@ -39,6 +39,8 @@
     <button class="btn btn--primary" type="button" (click)="createUser()">
       Account erstellen
     </button>
-    <p class="auth__meta">Schon ein Konto? Dann im Login anmelden.</p>
+    <p class="auth__meta">
+      <a class="auth__link cursor-pointer" (click)="move()">Schon ein Konto? Dann im Login anmelden.</a>
+    </p>
   </div>
 </section>

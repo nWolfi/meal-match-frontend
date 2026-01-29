@@ -203,6 +203,17 @@
   color: var(--green-600);
 }
 
+.auth__meta:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth__link {
+  color: var(--green-700);
+  font-weight: 600;
+  text-decoration: none;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
