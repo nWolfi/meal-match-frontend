@@ -1,11 +1,7 @@
 <div class="swipe-container">
   <h1 class="swipe-title">{{ meal.name }}</h1>
 
-  <button class="swipe-button swipe-button--dislike" (click)="getRandom()">
-    <span class="swipe-icon">👎</span>
-  </button>
-
-  <div class="meal-card">
+  <div class="meal-card" [class]="animationClass">
     <div class="meal-image-container">
       @if (meal.image) {
         <img [src]="'data:image/png;base64,' + meal.image" alt="Meal Image" class="meal-image" />
@@ -15,7 +11,12 @@
     </div>
   </div>
 
-  <button class="swipe-button swipe-button--like" (click)="getRandom()">
-    <span class="swipe-icon">👍</span>
-  </button>
+  <div class="button-container">
+    <button class="swipe-button swipe-button--dislike" (click)="dislike()">
+      <span class="swipe-icon">✕</span>
+    </button>
+    <button class="swipe-button swipe-button--like" (click)="like()">
+      <span class="swipe-icon">✓</span>
+    </button>
+  </div>
 </div>

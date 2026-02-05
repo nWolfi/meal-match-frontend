@@ -18,6 +18,12 @@ export class Swipe {
     ingredients: [],
   };
 
+  animationClass: string = '';
+
+  ngOnInit() {
+    this.getRandom();
+  }
+
   getRandom() {
     this.mealService.getRandomMeal().subscribe({
       next: (response) => {
@@ -28,5 +34,21 @@ export class Swipe {
         console.error('Error fetching random meal:', error);
       },
     });
+  }
+
+  like() {
+    this.animationClass = 'swipe-right';
+    setTimeout(() => {
+      this.animationClass = '';
+      this.getRandom();
+    }, 500);
+  }
+
+  dislike() {
+    this.animationClass = 'swipe-left';
+    setTimeout(() => {
+      this.animationClass = '';
+      this.getRandom();
+    }, 500);
   }
 }
