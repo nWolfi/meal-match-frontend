@@ -8,12 +8,22 @@ import { Meal } from '../model/meal.model';
 export class MealService {
   ApiAdapterService = inject(ApiAdapterService);
 
-  createMeal(meal: Meal, image: File) {
-    const formData = new FormData();
-    formData.append('meal', new Blob([JSON.stringify(meal)], { type: 'application/json' }));
-    formData.append('image', image);
+  createMeal(meal: Meal) {
+    return this.ApiAdapterService.post<Meal>('meal', meal);
+  }
 
-    console.log(image);
+  createMealWithImage(formData: FormData) {
     return this.ApiAdapterService.postFormData<Meal>('meal', formData);
+  }
+
+  getRandom(excludeIds?: string[]) {
+    if (!excludeIds) {
+      return this.ApiAdapterService.get<Meal>('meal/random');
+    }
+    return this.ApiAdapterService.getWithParams<Meal>('meal/random', { excludeIds });
+  }
+
+  getRandomMeal() {
+    return this.ApiAdapterService.get<Meal>('meal/random-meal');
   }
 }

@@ -15,32 +15,53 @@ export class CreateMeal {
 
   meal: Meal = {
     name: '',
-    Ingredients: [],
+    image: '',
+    ingredients: [],
   };
 
   ingredient: Ingredient = {
     name: '',
-    caloriesPerGram: 0,
     gram: 0,
+    caloriesPerGram: 0,
   };
 
   selectedFile: File | null = null;
 
   addIngredient() {
-    this.meal.Ingredients?.push({ ...this.ingredient });
+    this.meal.ingredients.push({ ...this.ingredient });
     this.ingredient = {
       name: '',
-      caloriesPerGram: 0,
       gram: 0,
     };
   }
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
   }
 
   createMeal() {
-    this.mealService.createMeal(this.meal, this.selectedFile!).subscribe({
+    if (this.selectedFile) {
+      this.uploadMeal();
+    } else {
+      console.warn('Ein Bild muss ausgewählt werden, um ein Meal zu erstellen.');
+      // Optional: Zeige eine Benutzerfreundliche Meldung, z.B. mit einem Alert oder Toast
+      alert('Bitte wählen Sie ein Bild aus, bevor Sie das Meal erstellen.');
+    }
+  }
+
+  uploadMeal() {
+    const formData = new FormData();
+    formData.append('image', this.selectedFile as Blob);
+    const mealData = {
+      name: this.meal.name,
+      ingredients: this.meal.ingredients,
+    };
+    formData.append('meal', JSON.stringify(mealData));
+
+    this.mealService.createMealWithImage(formData).subscribe({
       next: (response) => {
         console.log('Meal created successfully:', response);
       },

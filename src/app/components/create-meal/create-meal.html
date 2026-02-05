@@ -43,7 +43,7 @@
     <div class="panel panel--accent">
       <div class="panel__header">
         <h2 class="panel__title">Zutaten</h2>
-        <p class="panel__hint">Mengen und Kalorien pro Gramm.</p>
+        <p class="panel__hint">Zutaten und Mengen hinzufügen.</p>
       </div>
 
       <div class="ingredient-grid">
@@ -67,18 +67,6 @@
             placeholder="100"
           />
         </div>
-        <div class="field">
-          <label class="field__label" for="ingredient-calories">
-            Kalorien pro g
-          </label>
-          <input
-            class="field__input"
-            type="number"
-            id="ingredient-calories"
-            [(ngModel)]="ingredient.caloriesPerGram"
-            placeholder="0.9"
-          />
-        </div>
       </div>
 
       <button class="btn btn--ghost" type="button" (click)="addIngredient()">
@@ -87,13 +75,11 @@
 
       <div class="ingredients-list">
         <p class="ingredients-list__title">Aktuelle Zutaten</p>
-        @for (item of meal.Ingredients; track $index) {
+        @for (item of meal.ingredients; track $index) {
           <div class="ingredient-chip">
             <span class="ingredient-chip__name">{{ item.name }}</span>
             <span class="ingredient-chip__meta">{{ item.gram }} g</span>
-            <span class="ingredient-chip__meta">
-              {{ item.caloriesPerGram }} kcal/g
-            </span>
+            <span class="ingredient-chip__meta"> {{ item.caloriesPerGram }} kcal/g </span>
           </div>
         }
       </div>
@@ -101,11 +87,14 @@
   </div>
 
   <div class="create-meal__actions">
-    <button class="btn btn--primary" type="button" (click)="createMeal()">
+    <button
+      class="btn btn--primary"
+      type="button"
+      (click)="createMeal()"
+      [disabled]="!selectedFile"
+    >
       Meal erstellen
     </button>
-    <p class="create-meal__note">
-      Rezept spaeter anpassen, Zutaten jederzeit ergaenzen.
-    </p>
+    <p class="create-meal__note">Rezept spaeter anpassen, Zutaten jederzeit ergaenzen.</p>
   </div>
 </section>

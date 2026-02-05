@@ -9,7 +9,7 @@ import { Meal } from '../model/meal.model';
 export class ApiAdapterService {
   httpClient = inject(HttpClient);
 
-  baseUrl: string = 'http://localhost:8080/';
+  baseUrl: string = 'http://localhost:3000/';
 
   post<T>(url: string, body: any): Observable<T> {
     return this.httpClient.post<T>(this.buildUrl(url), body);
@@ -21,6 +21,10 @@ export class ApiAdapterService {
 
   get<T>(url: string): Observable<T> {
     return this.httpClient.get<T>(this.buildUrl(url));
+  }
+
+  getWithParams<T>(url: string, params: any): Observable<T> {
+    return this.httpClient.get<T>(this.buildUrl(url), { params });
   }
 
   put<T>(url: string, body: any): Observable<T> {
