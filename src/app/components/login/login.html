@@ -2,9 +2,7 @@
   <header class="auth__header">
     <p class="auth__eyebrow">Meal Match</p>
     <h1 class="auth__title">Login</h1>
-    <p class="auth__subtitle">
-      Melde dich an, um deine Meals zu verwalten.
-    </p>
+    <p class="auth__subtitle">Melde dich an, um deine Meals zu verwalten.</p>
   </header>
 
   <form class="panel">
@@ -16,6 +14,7 @@
     <div class="field">
       <label class="field__label" for="username">Benutzername</label>
       <input
+        [(ngModel)]="user.email"
         class="field__input"
         type="text"
         id="username"
@@ -26,6 +25,7 @@
     <div class="field">
       <label class="field__label" for="password">Passwort</label>
       <input
+        [(ngModel)]="user.password"
         class="field__input"
         type="password"
         id="password"
@@ -34,9 +34,9 @@
       />
     </div>
 
-    <button class="btn btn--primary" type="submit">Anmelden</button>
+    <button class="btn btn--primary" type="submit" (click)="login()">Anmelden</button>
     <p class="auth__meta">
-      <a class="auth__link" href="#">Passwort vergessen?</a>
+      <a class="auth__link">Passwort vergessen?</a>
     </p>
   </form>
 </section>

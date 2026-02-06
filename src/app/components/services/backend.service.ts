@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class BackendService {
   httpClient = inject(HttpClient);
 
-  basicUrl: string = 'http://localhost:8080/';
+  basicUrl: string = 'http://localhost:3000/';
 
   post(route: string, body: any): Observable<any> {
     return this.httpClient.post(this.basicUrl + route, body);
