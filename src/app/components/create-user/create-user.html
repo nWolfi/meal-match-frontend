@@ -2,9 +2,7 @@
   <header class="auth__header">
     <p class="auth__eyebrow">Meal Match</p>
     <h1 class="auth__title">Account erstellen</h1>
-    <p class="auth__subtitle">
-      Lege deinen Zugang an, um eigene Meals zu speichern.
-    </p>
+    <p class="auth__subtitle">Lege deinen Zugang an, um eigene Meals zu speichern.</p>
   </header>
 
   <div class="panel panel--accent">
@@ -36,9 +34,7 @@
       />
     </div>
 
-    <button class="btn btn--primary" type="button" (click)="createUser()">
-      Account erstellen
-    </button>
-    <p class="auth__meta">Schon ein Konto? Dann im Login anmelden.</p>
+    <button class="btn btn--primary" type="button" (click)="createUser()">Account erstellen</button>
+    <p class="auth__meta" (click)="navigate('login')">Schon ein Konto? Dann im Login anmelden.</p>
   </div>
 </section>
