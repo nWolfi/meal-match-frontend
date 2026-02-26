@@ -4,6 +4,7 @@ import { User } from '../../model/user.model';
 import { jwtDecode } from 'jwt-decode';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { Meal } from '../../model/meal.model';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +41,13 @@ export class UserService {
   }
 
   getDecodedToken() {
+    if (!this.decodedToken) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        this.token = token;
+        this.decodedToken = jwtDecode(token);
+      }
+    }
     return this.decodedToken;
   }
 
@@ -47,5 +55,25 @@ export class UserService {
     this.token = null;
     this.decodedToken = null;
     localStorage.removeItem('token');
+  }
+
+  saveMeal(meal: Meal) {
+    const id = this.getDecodedToken()?.sub;
+    if (!id) {
+      console.error('User ID not found in token. Cannot save meal.');
+      return;
+    }
+
+    return this.backendService.post(`user/collection/${id}`, meal);
+  }
+
+  getCollection() {
+    const id = this.getDecodedToken()?.sub;
+    if (!id) {
+      console.error('User ID not found in token. Cannot fetch collection.');
+      return;
+    }
+
+    return this.backendService.get(`user/collection/${id}`);
   }
 }

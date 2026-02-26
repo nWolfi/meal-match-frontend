@@ -73,7 +73,10 @@
   color: #34495e;
   cursor: pointer;
   border-radius: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease;
   font-weight: 500;
 }
 

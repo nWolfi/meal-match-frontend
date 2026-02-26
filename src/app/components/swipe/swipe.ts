@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Meal } from '../../model/meal.model';
 import { MealService } from '../../services/meal.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-swipe',
@@ -11,6 +12,7 @@ import { MealService } from '../../services/meal.service';
 })
 export class Swipe {
   mealService = inject(MealService);
+  userService = inject(UserService);
 
   meal: Meal = {
     name: '',
@@ -37,6 +39,15 @@ export class Swipe {
   }
 
   like() {
+    this.userService.saveMeal(this.meal)?.subscribe({
+      next: (response) => {
+        console.log('Meal saved successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error saving meal:', error);
+      },
+    });
+
     this.animationClass = 'swipe-right';
     setTimeout(() => {
       this.animationClass = '';

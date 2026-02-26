@@ -26,6 +26,7 @@ export class CreateUser {
       .subscribe({
         next: (response) => {
           console.log('User created successfully:', response);
+          this.router.navigate(['login']);
         },
         error: (error) => {
           console.error('Error creating user:', error);
