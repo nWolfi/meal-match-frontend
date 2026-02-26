@@ -1,10 +1,51 @@
-<p>collection works!</p>
+<section class="collection">
+  <header class="collection__header">
+    <p class="collection__eyebrow">Meal Match</p>
+    <h1 class="collection__title">Deine Collection</h1>
+    <p class="collection__subtitle">Alle gespeicherten Meals auf einen Blick.</p>
+  </header>
 
-@for (meal of mealCollection(); track $index) {
-  <p>{{ meal.name }}</p>
-  @for (ingredient of meal.ingredients; track $index) {
-    <p>{{ ingredient.name }}</p>
-    <p>{{ ingredient.gram }}</p>
-    <p>{{ ingredient.caloriesPerGram }}</p>
+  @if (mealCollection().length > 0) {
+    <div class="collection__grid">
+      @for (meal of mealCollection(); track $index) {
+        <article class="meal-card">
+          <div class="meal-card__image-wrap">
+            @if (meal.image) {
+              <img
+                [src]="'data:image/png;base64,' + meal.image"
+                alt="Meal Image"
+                class="meal-image"
+              />
+            } @else {
+              <p class="meal-card__no-image">Kein Bild verfügbar</p>
+            }
+          </div>
+
+          <div class="meal-card__body">
+            <h2 class="meal-card__title">{{ meal.name }}</h2>
+
+            @if (meal.ingredients.length > 0) {
+              <p class="meal-card__meta">{{ meal.ingredients.length }} Zutaten</p>
+              <div class="meal-card__ingredients">
+                @for (ingredient of meal.ingredients; track ingredient.name + '-' + $index) {
+                  <span class="ingredient-chip">
+                    {{ ingredient.name }} ({{ ingredient.gram }} g)
+                    @if (ingredient.caloriesPerGram != null) {
+                      · {{ ingredient.caloriesPerGram }} kcal/g
+                    }
+                  </span>
+                }
+              </div>
+            } @else {
+              <p class="meal-card__meta">Keine Zutaten hinterlegt.</p>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="collection__empty">
+      <p>Noch keine gespeicherten Meals vorhanden.</p>
+    </div>
   }
-}
+</section>
