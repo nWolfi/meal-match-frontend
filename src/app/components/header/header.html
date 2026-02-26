@@ -4,19 +4,47 @@
   </div>
   <ul class="navbar-menu">
     <li class="navbar-item">
-      <button class="navbar-link" (click)="navigate('')">Home</button>
+      <button
+        class="navbar-link"
+        type="button"
+        [class.navbar-link--active]="isActive('')"
+        (click)="navigate('')"
+      >
+        Home
+      </button>
     </li>
     <li class="navbar-item">
-      <button class="navbar-link" (click)="navigate('create-meal')">Create Meal</button>
+      <button
+        class="navbar-link"
+        type="button"
+        [class.navbar-link--active]="isActive('create-meal')"
+        (click)="navigate('create-meal')"
+      >
+        Create Meal
+      </button>
     </li>
     <li class="navbar-item">
-      <button class="navbar-link" (click)="navigate('swipe')">Swipe</button>
+      <button
+        class="navbar-link"
+        type="button"
+        [class.navbar-link--active]="isActive('swipe')"
+        (click)="navigate('swipe')"
+      >
+        Swipe
+      </button>
     </li>
     <li class="navbar-item">
-      <button class="navbar-link" (click)="navigate('collection')">Collection</button>
+      <button
+        class="navbar-link"
+        type="button"
+        [class.navbar-link--active]="isActive('collection')"
+        (click)="navigate('collection')"
+      >
+        Collection
+      </button>
     </li>
     <li class="navbar-item">
-      <button class="navbar-link" (click)="logout()">Logout</button>
+      <button class="navbar-link navbar-link--logout" type="button" (click)="logout()">Logout</button>
     </li>
   </ul>
 </nav>

@@ -11,7 +11,7 @@ export const routes: Routes = [
   { path: '', component: StartPage },
   { path: 'create-user', component: CreateUser },
   { path: 'login', component: Login },
-  { path: 'create-meal', component: CreateMeal, canActivate: [AuthGuard] },
-  { path: 'swipe', component: Swipe, canActivate: [AuthGuard] },
-  { path: 'collection', component: Collection, canActivate: [AuthGuard] },
+  { path: 'create-meal', component: CreateMeal },
+  { path: 'swipe', component: Swipe },
+  { path: 'collection', component: Collection },
 ];

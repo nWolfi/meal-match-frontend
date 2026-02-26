@@ -1,22 +1,53 @@
-<div class="swipe-container">
-  <h1 class="swipe-title">{{ meal.name }}</h1>
+<section class="swipe">
+  <header class="swipe__header">
+    <p class="swipe__eyebrow">Meal Match</p>
+    <h1 class="swipe__title">Swipe Kitchen</h1>
+    <p class="swipe__subtitle">Entscheide schnell: links verwerfen, rechts in deine Sammlung.</p>
+  </header>
 
-  <div class="meal-card" [class]="animationClass">
-    <div class="meal-image-container">
-      @if (meal.image) {
-        <img [src]="'data:image/png;base64,' + meal.image" alt="Meal Image" class="meal-image" />
-      } @else {
-        <p class="no-image">Kein Bild verfügbar</p>
-      }
+  <div class="swipe__panel">
+    <article class="meal-card" [ngClass]="animationClass">
+      <div class="meal-card__image-wrap">
+        @if (meal.image) {
+          <img [src]="'data:image/png;base64,' + meal.image" alt="Meal Image" class="meal-card__image" />
+        } @else {
+          <p class="meal-card__no-image">Kein Bild verfuegbar</p>
+        }
+      </div>
+      <div class="meal-card__body">
+        <h2 class="meal-card__title">{{ meal.name || 'Neues Meal wird geladen' }}</h2>
+        @if (meal.ingredients.length > 0) {
+          <p class="meal-card__meta">{{ meal.ingredients.length }} Zutaten</p>
+          <div class="meal-card__ingredients">
+            @for (ingredient of meal.ingredients; track ingredient.name + '-' + $index) {
+              <span class="ingredient-chip">{{ ingredient.name }} ({{ ingredient.gram }} g)</span>
+            }
+          </div>
+        } @else {
+          <p class="meal-card__meta">Keine Zutaten hinterlegt.</p>
+        }
+      </div>
+    </article>
+
+    <div class="swipe__actions">
+      <button
+        class="swipe-button swipe-button--dislike"
+        type="button"
+        [disabled]="!meal.name"
+        (click)="dislike()"
+        aria-label="Meal verwerfen"
+      >
+        <span class="swipe-icon">✕</span>
+      </button>
+      <button
+        class="swipe-button swipe-button--like"
+        type="button"
+        [disabled]="!meal.name"
+        (click)="like()"
+        aria-label="Meal speichern"
+      >
+        <span class="swipe-icon">✓</span>
+      </button>
     </div>
   </div>
-
-  <div class="button-container">
-    <button class="swipe-button swipe-button--dislike" (click)="dislike()">
-      <span class="swipe-icon">✕</span>
-    </button>
-    <button class="swipe-button swipe-button--like" (click)="like()">
-      <span class="swipe-icon">✓</span>
-    </button>
-  </div>
-</div>
+</section>
