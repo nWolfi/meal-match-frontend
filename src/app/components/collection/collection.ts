@@ -1,6 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Meal } from '../../model/meal.model';
+import { single } from 'rxjs';
 
 @Component({
   selector: 'app-collection',
@@ -11,7 +12,7 @@ import { Meal } from '../../model/meal.model';
 export class Collection implements OnInit {
   userService = inject(UserService);
 
-  mealCollection: Meal[] = [];
+  mealCollection = signal<Meal[]>([]);
 
   ngOnInit() {
     this.getCollection();
@@ -20,7 +21,7 @@ export class Collection implements OnInit {
   getCollection() {
     this.userService.getCollection()?.subscribe({
       next: (response) => {
-        this.mealCollection = response;
+        this.mealCollection.set(response);
         console.log('Collection fetched successfully:', response);
       },
       error: (error) => {

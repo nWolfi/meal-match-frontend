@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Meal } from '../../model/meal.model';
 import { MealService } from '../../services/meal.service';
@@ -10,15 +10,15 @@ import { UserService } from '../services/user.service';
   templateUrl: './swipe.html',
   styleUrl: './swipe.scss',
 })
-export class Swipe {
+export class Swipe implements OnInit {
   mealService = inject(MealService);
   userService = inject(UserService);
 
-  meal: Meal = {
+  meal = signal<Meal>({
     name: '',
     image: '',
     ingredients: [],
-  };
+  });
 
   animationClass: string = '';
 
@@ -29,7 +29,7 @@ export class Swipe {
   getRandom() {
     this.mealService.getRandomMeal().subscribe({
       next: (response) => {
-        this.meal = response;
+        this.meal.set(response);
         console.log('Random meal fetched successfully:', response);
       },
       error: (error) => {
@@ -39,7 +39,7 @@ export class Swipe {
   }
 
   like() {
-    this.userService.saveMeal(this.meal)?.subscribe({
+    this.userService.saveMeal(this.meal())?.subscribe({
       next: (response) => {
         console.log('Meal saved successfully:', response);
       },

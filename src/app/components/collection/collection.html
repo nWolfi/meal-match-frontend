@@ -1,6 +1,10 @@
 <p>collection works!</p>
 
-@for (meal of mealCollection; track $index) {
+@for (meal of mealCollection(); track $index) {
   <p>{{ meal.name }}</p>
-  <p>{{ meal.ingredients }}</p>
+  @for (ingredient of meal.ingredients; track $index) {
+    <p>{{ ingredient.name }}</p>
+    <p>{{ ingredient.gram }}</p>
+    <p>{{ ingredient.caloriesPerGram }}</p>
+  }
 }
