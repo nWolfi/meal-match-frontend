@@ -23,7 +23,7 @@ export class Collection implements OnInit {
 
     this.userService.getCollection()?.subscribe({
       next: (response) => {
-        this.mealCollection.set(response.meals);
+        this.mealCollection.set(response);
         console.log('Collection fetched successfully:', response.meals);
       },
       error: (error) => {
