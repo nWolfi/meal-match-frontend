@@ -64,7 +64,9 @@ export class UserService {
       return;
     }
 
-    return this.backendService.post(`user/collection/${id}`, meal);
+    const mealData = { mealId: meal.id };
+
+    return this.backendService.post(`user/collection/${id}`, mealData);
   }
 
   getCollection() {

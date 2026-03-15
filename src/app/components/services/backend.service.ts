@@ -10,7 +10,7 @@ export class BackendService {
 
   basicUrl: string = 'http://localhost:3000/';
 
-  post(route: string, body: any): Observable<any> {
+  post(route: string, body?: any): Observable<any> {
     return this.httpClient.post(this.basicUrl + route, body);
   }
 

@@ -19,10 +19,12 @@ export class Collection implements OnInit {
   }
 
   getCollection() {
+    console.log('Fetching collection for user...');
+
     this.userService.getCollection()?.subscribe({
       next: (response) => {
-        this.mealCollection.set(response);
-        console.log('Collection fetched successfully:', response);
+        this.mealCollection.set(response.meals);
+        console.log('Collection fetched successfully:', response.meals);
       },
       error: (error) => {
         console.error('Error fetching collection:', error);

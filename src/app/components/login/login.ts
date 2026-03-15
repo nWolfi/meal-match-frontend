@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { User } from '../../model/user.model';
@@ -19,6 +19,8 @@ export class Login {
     password: '',
   };
 
+  errorMessage = signal<string>('');
+
   login() {
     this.user.email = this.user.email.trim();
     this.user.password = this.user.password.trim();
@@ -31,6 +33,8 @@ export class Login {
     this.userService.login(this.user).subscribe((success) => {
       if (success) {
         this.router.navigate(['swipe']);
+      } else {
+        this.errorMessage.set('Login failed: Invalid email or password');
       }
     });
   }
